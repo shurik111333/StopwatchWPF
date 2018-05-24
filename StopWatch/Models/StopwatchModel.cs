@@ -20,18 +20,11 @@ namespace StopWatch.Models
             Laps = new ReadOnlyObservableCollection<TimeSpan>(_laps);
         }
 
-        public void Start()
-        {
-            if (IsStopped)
-            {
-                ResetLaps();
-            }
-            _sw.Start();
-        }
-
-        public void Lap() => _laps.Add(_sw.Elapsed);
+        public void Start() => _sw.Start();
 
         public void Stop() => _sw.Stop();
+
+        public void Lap() => _laps.Add(_sw.Elapsed);
 
         public void Reset()
         {
@@ -39,6 +32,6 @@ namespace StopWatch.Models
             ResetLaps();
         }
 
-        public void ResetLaps() => _laps.Clear();
+        private void ResetLaps() => _laps.Clear();
     }
 }

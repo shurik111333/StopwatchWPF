@@ -1,0 +1,34 @@
+﻿<Window x:Class="StopWatch.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StopWatch.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:StopwatchVM x:Key="VM" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource VM}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.35*" />
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Row="0" Grid.Column="0" Margin="10">
+            <TextBlock Name="Time" TextAlignment="Center" TextWrapping="Wrap"
+                       Text="{Binding Elapsed, StringFormat=mm\\:ss\\:ff}" />
+        </Viewbox>
+        <UniformGrid Rows="1" Columns="4" Name="StackButtons" Grid.Row="1" Grid.Column="0" 
+                     VerticalAlignment="Center" Margin="10">
+            <Button Name="StartButton" Margin="5" Command="{Binding StartCommand}">Start</Button>
+            <Button Name="StopButton" Margin="5" Command="{Binding StopCommand}">Stop</Button>
+            <Button Name="LapButton" Margin="5" Command="{Binding LapCommand}">Lap</Button>
+            <Button Name="ResetButton" Margin="5" Command="{Binding ResetCommand}">Reset</Button>
+        </UniformGrid>
+        <ListBox Name="Laps" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding Laps}" Margin="10" />
+    </Grid>
+</Window>
